@@ -10,12 +10,19 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-mongoose.connect('mongodb://localhost/cordova')
+mongoose.connect('mongodb://localhost/cordova', {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+}).then((res) => { console.log('Mongo DB connected') }).catch(error => console.log("mongo connection error", error));
 
 app.use('/api', api)
 
 app.use(morgan('combined'))
 
+// BaseURL
+app.get('/', (req, res) => {
+    return res.send('API Works')
+})
 
 app.listen(9999)
 
