@@ -1,5 +1,5 @@
 node_modules
 package-lock.json
-front-end
-back-end
+/front-end
+/back-end
 
