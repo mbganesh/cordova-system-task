@@ -133,6 +133,7 @@ const usePurchaseStore = create((set) => ({
   formDataArray:dummyList,
   itemData : {},
   vendor,
+  currentData: {},
   getOrderId: `PO_${Math.floor(Math.random() * 10000)}`,
   addForm: () =>
     set((state) => ({
@@ -173,8 +174,10 @@ const usePurchaseStore = create((set) => ({
       updatedFormDataArray[index].items[itemIndex][field] = value;
       return { formDataArray: updatedFormDataArray };
     }),
-    currentItem:() => {
-
+    setCurrentForm:(object) => {
+      set((state)=> {
+          
+      })
     }
 }));
 

@@ -8,21 +8,27 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Button,
 } from "@mui/material";
+import EyeIcon from "@mui/icons-material/RemoveRedEye"
 import usePurchaseStore from "store/productStore";
-
+import usePurchase from "store/products";
+import { useNavigate } from "react-router-dom";
 export default function PurchaseList() {
-  const { formDataArray } = usePurchaseStore();
+  const navigate = useNavigate();
+  // const { formDataArray } = usePurchaseStore();
+  const { formDataArray } = usePurchase();
 
   return (
     <TableContainer component={Paper}>
       <Table>
         <TableHead>
-          <TableRow>
-            <TableCell>Vendor</TableCell>
-            <TableCell>Purchase Order Number</TableCell>
-            <TableCell>Purchase Date</TableCell>
-            <TableCell>Inventory Location</TableCell>
+          <TableRow >
+            <TableCell style={{fontWeight:'bold'}}>Vendor</TableCell>
+            <TableCell style={{fontWeight:'bold'}}>Purchase Order Number</TableCell>
+            <TableCell style={{fontWeight:'bold'}}>Purchase Date</TableCell>
+            <TableCell style={{fontWeight:'bold'}}>Inventory Location</TableCell>
+            <TableCell style={{fontWeight:'bold'}}>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -32,6 +38,13 @@ export default function PurchaseList() {
               <TableCell>{formData.purchaseOrderNumber}</TableCell>
               <TableCell>{formData.purchaseOrderNumber}</TableCell>
               <TableCell>{formData.inventoryLocation}</TableCell>
+              <TableCell>
+                <Button
+                endIcon={<EyeIcon/>} onClick={() => navigate(`/add-order`, {state: {data: formData.purchaseOrderNumber}})}
+                >
+                  View Order 
+                </Button>
+                </TableCell>
             </TableRow>
           ))}
         </TableBody>
