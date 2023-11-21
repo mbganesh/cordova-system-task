@@ -11,7 +11,6 @@ import {
   Button,
 } from "@mui/material";
 import EyeIcon from "@mui/icons-material/RemoveRedEye";
-import usePurchaseStore from "store/productStore";
 import usePurchase from "store/products";
 import { useNavigate } from "react-router-dom";
 export default function PurchaseList() {
