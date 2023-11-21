@@ -8,14 +8,14 @@ import { useNavigate } from "react-router-dom";
 import usePurchaseStore from "store/productStore";
 import usePurchase from "store/products";
 
-export default function Header({formDatafromApp}) {
+export default function Header({ formDatafromApp }) {
   const navigate = useNavigate();
   const { formDataArray, setForm, addFormItem, updateFormItem } =
     usePurchaseStore();
 
-  const { loadData,addFormData } = usePurchase();
+  const { loadData, addFormData } = usePurchase();
 
-  const {  getValues } = useForm();
+  const { getValues } = useForm();
   const path = window.location.pathname.split("/");
   console.log("path: ", path);
   console.log('path.includes("add-order"): ', path.includes("add-order"));
@@ -25,20 +25,20 @@ export default function Header({formDatafromApp}) {
 
   // };
   const handleSave = () => {
-    const formData = formDatafromApp
-  
+    const formData = formDatafromApp;
+
     // Assuming you have a function to save data to a JSON file
     saveDataToJsonFile(formData);
   };
-  
+
   // Function to save data to a JSON file (modify this based on your needs)
   const saveDataToJsonFile = (data) => {
     // Perform logic to save the data to a JSON file or send it to a server
     // For demonstration purposes, logging the data to the console
     console.log("Saving data to JSON file: ", data);
-    addFormData(data)
+    addFormData(data);
   };
-  
+
   const handleLoad = () => {
     loadData();
   };
@@ -66,11 +66,7 @@ export default function Header({formDatafromApp}) {
             </Button>
           ) : null}
 
-          {path.includes("add-order") ? (
-            <Button color="inherit" onClick={() => handleSave()}>
-              Confirm Order
-            </Button>
-          ) : (
+          {path.includes("add-order") ? null : (
             <Button color="inherit" onClick={() => navigate("/add-order")}>
               Add Order
             </Button>

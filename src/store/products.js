@@ -89,20 +89,41 @@ const dummyList = [
 const usePurchaseStore = create((set) => ({
   formDataArray: [],
   vendor,
-  currentData: {},
   getOrderId: `PO_${Math.floor(Math.random() * 10000)}`,
   loadData: () =>
+    // test
     set(() => ({
       formDataArray: dummyList,
     })),
-  addFormData: (newFormData) =>
+
+  addProductToVendor: (
+    newProduct // new product
+  ) =>
+    set((state) => {
+      const updatedOrders = [...state.formDataArray, newProduct];
+      return { formDataArray: updatedOrders };
+    }),
+
+  addFormData: (
+    newFormData // use later
+  ) =>
     set((state) => ({
-      formDataArray: [...state.formDataArray, {...newFormData, purchaseOrderNumber:`PO_${Math.floor(Math.random() * 10000)}`,} ],
+      formDataArray: [
+        ...state.formDataArray,
+        {
+          ...newFormData,
+          purchaseOrderNumber: `PO_${Math.floor(Math.random() * 10000)}`,
+        },
+      ],
     })),
   getSingleData: (purchaseOrderNumber) =>
-    set((state) => ({
-      currentData: state.formDataArray.find((data) => data.purchaseOrderNumber === purchaseOrderNumber) || {},
-    })),
+    set((state) => {
+      const foundOrder = state.formDataArray.find(
+        (order) => order.purchaseOrderNumber === purchaseOrderNumber
+      );
+      console.log("foundOrder: ", foundOrder);
+      return { foundOrder };
+    }),
 }));
 
 export default usePurchaseStore;
